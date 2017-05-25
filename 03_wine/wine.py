@@ -133,7 +133,8 @@ def NN_train(datas_train, labels_train, datas_test, labels_test, fid):
     accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
     #run
-    init = tf.initialize_all_variables()
+    #init = tf.initialize_all_variables()
+    init = tf.global_variables_initializer()
     batch_size = 10
     with tf.Session() as sess:
         sess.run(init)
@@ -198,15 +199,15 @@ def plot_log_data(filename):
 if __name__ == '__main__':
 
     file_name = 'log.txt'
-    # fid = open(file_name,'w')
-    # print('read data...')
-    # datas,labels = read_data()
-    # print('split data...')
-    # datas_train, labels_train, datas_test, labels_test = split_train_test(datas,labels)
-    # print('train the neural network...')
-    # NN_train(datas_train, labels_train, datas_test, labels_test, fid)
-    # print 'end, log file is %s'%file_name
-    # fid.close();
+    fid = open(file_name,'w')
+    print('read data...')
+    datas,labels = read_data()
+    print('split data...')
+    datas_train, labels_train, datas_test, labels_test = split_train_test(datas,labels)
+    print('train the neural network...')
+    NN_train(datas_train, labels_train, datas_test, labels_test, fid)
+    print 'end, log file is %s'%file_name
+    fid.close();
 
     plot_log_data(file_name)
 
